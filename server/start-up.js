@@ -17,23 +17,18 @@ Meteor.startup(() => {
                 url: '/resources/seoul/2-ls.jpg', likes: 0
             },
             {
-                location: 'seoul', title: 'ART OF BEER 2호점', subTitle: '홍보용 팝 포스터 제작',
-                address: '서울광역시 강남구 압구정동 로데오거리 예정', hp: '-',
-                url: '/resources/seoul/3-ls.jpg', likes: 0
-            },
-            {
                 location: 'seoul', title: 'CAFE YOGI', subTitle: '여러분의 사진을 담아주세요',
                 address: '서울광역시 용산구 이태원동 557', hp: '02-792-3476',
                 url: '/resources/seoul/4-ls.jpg', likes: 0
             },
             {
-                location: 'seoul', title: 'IDAHO', subTitle: '파티와 공연을 좋아하는 아티스트는 주목해주세요',
+                location: 'seoul', title: 'IDAHO', subTitle: '파티와 공연을 좋아하는 아티스트 필독!',
                 address: '서울특별시 마포구 동교로 39 2층', hp: '070-8871-0412',
                 url: '/resources/seoul/5-ls.jpg', likes: 0
             },
             {
                 location: 'seoul', title: '별달밤', subTitle: '조그맣게 여러분의 글을 전시하고 싶어요',
-                address: '서울광역시 종로구 성균관로 38 1층', hp: '010-5094-2700',
+                address: '서울광역시 종로구 성균관로 38 1층', hp: '-',
                 url: '/resources/seoul/6-ls.jpg', likes: 0
             },
             {
@@ -58,7 +53,7 @@ Meteor.startup(() => {
             },
             {
                 location: 'daegu', title: '버드', subTitle: '신나는 락밴드 공연 모집',
-                address: '대구광역시 중구 달구벌대로 2131-2', hp: '010-8635-8242',
+                address: '대구광역시 중구 달구벌대로 2131-2', hp: '-',
                 url: '/resources/daegu/4-ls.jpg', likes: 0
             },
             {
@@ -68,7 +63,7 @@ Meteor.startup(() => {
             },
             {
                 location: 'daegu', title: '플라방', subTitle: '통통 튀는 분위기에 맞는 일러스트',
-                address: '대구광역시 중구 동성로 71-13 3층', hp: '010-9677-3342',
+                address: '대구광역시 중구 동성로 71-13 3층', hp: '-',
                 url: '/resources/daegu/6-ls.jpg', likes: 0
             },
             {
@@ -112,7 +107,7 @@ Meteor.startup(() => {
                 url: '/resources/busan/8-ls.jpg', likes: 0
             },
             {
-                location: 'busan', title: 'PORT 1902', subTitle: '저희 공간의 배경음악을 맡아주실 뮤지션을 기다립니다.',
+                location: 'busan', title: 'PORT 1902', subTitle: '포트1902의 BGM을 맡아주실 뮤지션',
                 address: '부산광역시 해운대구 송정구 덕포길 170-5', hp: '1899-6837',
                 url: '/resources/busan/9-ls.jpg', likes: 0
             },
@@ -161,6 +156,11 @@ Meteor.startup(() => {
 
     Meteor.publish('findAllShops', function(){
         return Shops.find({});
+    });
+
+
+    Meteor.publish('findShops', function(location){
+        return Shops.find({location: location});
     });
 
     Meteor.methods({

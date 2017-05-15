@@ -7,6 +7,8 @@ import {WindowResizeListener} from 'react-window-resize-listener';
 import {createContainer} from 'meteor/react-meteor-data';
 import {Shops} from '../../../imports/collections/shops';
 
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
 class Header extends Component {
     render() {
         return (
@@ -55,22 +57,21 @@ class MenuModal extends Component {
                 <div style={{
                     position: 'absolute',
                     width: 400,
-                    height: 400,
+                    height: 300,
                     left: '50%',
                     top: '50%',
                     marginLeft: -200,
-                    marginTop: -200,
+                    marginTop: -140,
                     // backgroundColor: 'red',
                     textAlign: 'center'
                 }}>
-                    <div className="hoverMenuTitle">MY STUDIO</div>
-                    <div className="hoverMenuDivider">-</div>
+                    <div className="hoverMenu">MY STUDIO</div>
                     <div className="hoverMenu">F5 CO-WORK</div>
                     <div className="hoverMenu">F4 PROJECT</div>
                     <div className="hoverMenu">F3 NEWSFEED</div>
                     <div className="hoverMenu">F2 EXPLORE</div>
                     <div className="hoverMenu">F1 LOBBY (MAIN)</div>
-                    <div className="hoverMenuFooter">B1 #APT</div>
+                    <div className="hoverMenu">B1 #APT</div>
                 </div>
             </div>)
     }
@@ -104,7 +105,7 @@ class Card extends Component {
         if (this.state.width <= 600) {
             cardWidth = this.state.width * 0.9;
         } else if (this.state.width > 600 && this.state.width <= 1200) {
-            cardWidth = this.state.width * 0.43;
+            cardWidth = this.state.width * 0.44;
         } else {
             cardWidth = this.state.width * 0.29;
         }
@@ -123,9 +124,7 @@ class Card extends Component {
 
                 <img className="image" style={{
                     borderRadius: '5px 5px 0 0',
-                    borderBottom: '1px solid #eeeeee',
-                    animationDuration: '2s',
-                    animationName: 'fadeIn'
+                    borderBottom: '1px solid #eeeeee'
                 }}
                      src={this.props.url}
                      width={cardWidth - 2}/>
@@ -143,7 +142,7 @@ class Card extends Component {
                     <div style={{
                         fontFamily: 'KoPub Batang',
                         color: '#333333',
-                        fontSize: 16,
+                        fontSize: 15,
                         marginBottom: 10,
                         textAlign: 'left'
                     }}>{this.props.subTitle}</div>
@@ -173,8 +172,15 @@ class CardGrid extends Component {
         return this.props.dataSet.map(card => {
             count++;
             return (
-                <Card key={count} url={card.url} title={card.title} subTitle={card.subTitle}
-                      hp={card.hp} address={card.address} likes={card.likes} id={card._id}/>
+                <ReactCSSTransitionGroup
+                    key={count}
+                    transitionName="fade"
+                    transitionAppear={true}
+                    transitionAppearTimeout={500}
+                    transitionEnter={false} transitionLeave={false}>
+                    <Card url={card.url} title={card.title} subTitle={card.subTitle}
+                          hp={card.hp} address={card.address} likes={card.likes} id={card._id}/>
+                </ReactCSSTransitionGroup>
             )
         })
     }
@@ -195,14 +201,14 @@ class Main extends Component {
             location: 'seoul',
             menuStyles: {
                 seoul: {
-                    textAlign: 'left'
+                    textAlign: 'center'
                 },
                 daegu: {
                     color: '#aaaaaa'
                 },
                 busan: {
                     marginBottom: 10,
-                    textAlign: 'right',
+                    textAlign: 'center',
                     color: '#aaaaaa'
                 }
             },
@@ -214,21 +220,21 @@ class Main extends Component {
         this.state.menuStyles.seoul.color = '#000000';
         this.state.menuStyles.daegu.color = '#aaaaaa';
         this.state.menuStyles.busan.color = '#aaaaaa';
-        this.setState({location: 'seoul'})
+        this.setState({location: 'seoul'});
     }
 
     clickDaegu() {
         this.state.menuStyles.seoul.color = '#aaaaaa';
         this.state.menuStyles.daegu.color = '#000000';
         this.state.menuStyles.busan.color = '#aaaaaa';
-        this.setState({location: 'daegu'})
+        this.setState({location: 'daegu'});
     }
 
     clickBusan() {
         this.state.menuStyles.seoul.color = '#aaaaaa';
         this.state.menuStyles.daegu.color = '#aaaaaa';
         this.state.menuStyles.busan.color = '#000000';
-        this.setState({location: 'busan'})
+        this.setState({location: 'busan'});
     }
 
     onMenu() {
@@ -238,6 +244,7 @@ class Main extends Component {
     onQuit() {
         this.setState({hoverMenu: false});
     }
+
 
     render() {
         var dataSet = this.props.shops.filter(function (shop) {
@@ -271,7 +278,9 @@ class Main extends Component {
                         </div>
                     </div>
 
-                    <div id="menu-bar">
+                    <div id="menu-bar" style={{
+                        width: '100%'
+                    }}>
                         <div onClick={this.clickSeoul.bind(this)} className="menu" style={this.state.menuStyles.seoul}>
                             SEOUL
                         </div>
@@ -284,7 +293,8 @@ class Main extends Component {
                     </div>
 
                     <div id="cardGrid" style={{
-                        textAlign: 'center'
+                        textAlign: 'center',
+                        marginRight: -10
                     }}>
                         <CardGrid dataSet={dataSet}/>
                     </div>
@@ -299,3 +309,4 @@ export default createContainer((props) => {
         shops: Shops.find({}).fetch()
     }
 }, Main);
+
