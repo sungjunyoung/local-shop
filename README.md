@@ -1,4 +1,3 @@
-# React / Meteor 로 만든 Local-Shop
+# React / Meteor 홈페이지
 
 ![image](./screenshot.png)
-

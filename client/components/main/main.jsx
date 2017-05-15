@@ -33,47 +33,53 @@ class Header extends Component {
 class MenuModal extends Component {
     render() {
         return (
-            <div style={{
-                position: 'fixed',
-                width: '100%',
-                height: '100%',
-                left: 0,
-                top: 0,
-                backgroundColor: 'rgba(0,0,0,0.8)',
-                zIndex: 999
-            }}>
-
-                <i style={{
-                    color: 'white', fontSize: 40,
-                    position: 'fixed',
-                    right: '5%',
-                    top: 20,
-                    cursor: 'pointer'
-                }}
-                   onClick={this.props.onQuit}
-                   className="material-icons">clear</i>
-
-
+            <ReactCSSTransitionGroup
+                transitionName="fade"
+                transitionAppear={true}
+                transitionAppearTimeout={200}
+                transitionEnter={false} transitionLeave={false}>
                 <div style={{
-                    position: 'absolute',
-                    width: 400,
-                    height: 300,
-                    left: '50%',
-                    top: '50%',
-                    marginLeft: -200,
-                    marginTop: -140,
-                    // backgroundColor: 'red',
-                    textAlign: 'center'
+                    position: 'fixed',
+                    width: '100%',
+                    height: '100%',
+                    left: 0,
+                    top: 0,
+                    backgroundColor: 'rgba(0,0,0,0.8)',
+                    zIndex: 999
                 }}>
-                    <div className="hoverMenu">MY STUDIO</div>
-                    <div className="hoverMenu">F5 CO-WORK</div>
-                    <div className="hoverMenu">F4 PROJECT</div>
-                    <div className="hoverMenu">F3 NEWSFEED</div>
-                    <div className="hoverMenu">F2 EXPLORE</div>
-                    <div className="hoverMenu">F1 LOBBY (MAIN)</div>
-                    <div className="hoverMenu">B1 #APT</div>
+
+                    <i style={{
+                        color: 'white', fontSize: 40,
+                        position: 'fixed',
+                        right: '5%',
+                        top: 20,
+                        cursor: 'pointer'
+                    }}
+                       onClick={this.props.onQuit}
+                       className="material-icons">clear</i>
+
+
+                    <div style={{
+                        position: 'absolute',
+                        width: 400,
+                        height: 300,
+                        left: '50%',
+                        top: '50%',
+                        marginLeft: -200,
+                        marginTop: -140,
+                        // backgroundColor: 'red',
+                        textAlign: 'center'
+                    }}>
+                        <div className="hoverMenu">MY STUDIO</div>
+                        <div className="hoverMenu">F5 CO-WORK</div>
+                        <div className="hoverMenu">F4 PROJECT</div>
+                        <div className="hoverMenu">F3 NEWSFEED</div>
+                        <div className="hoverMenu">F2 EXPLORE</div>
+                        <div className="hoverMenu">F1 LOBBY (MAIN)</div>
+                        <div className="hoverMenu">B1 #APT</div>
+                    </div>
                 </div>
-            </div>)
+            </ReactCSSTransitionGroup>)
     }
 }
 
